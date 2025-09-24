@@ -1,0 +1,15 @@
+# This file describes a Fastly Compute package. To learn more visit:
+# https://www.fastly.com/documentation/reference/compute/fastly-toml
+
+authors = ["jliew@fastly.com"]
+cloned_from = "https://github.com/fastly/compute-starter-kit-rust-default"
+description = "Bot Invaders Game"
+language = "rust"
+manifest_version = 3
+name = "Bot Invaders"
+service_id = "pW9mlV7xwwyvmw3q98uKA3"
+
+[local_server]
+
+[scripts]
+  build = "cargo build --profile release"

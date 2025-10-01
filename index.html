@@ -1305,24 +1305,24 @@ const buttonTemplate = `
 				
 				switch (layout) {
 					case 'ultrawide':
-						// Side-by-side layout for ultrawide screens
+						// Side-by-side layout for ultrawide screens - header/footer will be hidden
 						config = {
 							topbar: { left: 0, top: 0, width: gameWidth, height: vh * 0.05 },
-							header: { left: 0, top: vh * 0.05, width: gameWidth * 0.7, height: vh * 0.15 },
-							leaderboard: { left: gameWidth * 0.7, top: vh * 0.05, width: gameWidth * 0.3, height: vh * 0.8 },
-							gamearea: { left: 0, top: vh * 0.2, width: gameWidth * 0.7, height: vh * 0.65 },
-							footer: { left: 0, top: vh * 0.85, width: gameWidth * 0.7, height: vh * 0.15 }
+							header: { left: 0, top: vh * 0.05, width: gameWidth * 0.7, height: 0 },
+							leaderboard: { left: gameWidth * 0.7, top: vh * 0.05, width: gameWidth * 0.3, height: vh * 0.95 },
+							gamearea: { left: 0, top: vh * 0.05, width: gameWidth * 0.7, height: vh * 0.95 },
+							footer: { left: 0, top: vh * 1.0, width: gameWidth * 0.7, height: 0 }
 						};
 						break;
 						
 					case 'landscape':
-						// Standard landscape layout
+						// Standard landscape layout - header/footer will be hidden
 						config = {
 							topbar: { left: 0, top: 0, width: gameWidth, height: vh * 0.05 },
-							header: { left: 0, top: vh * 0.05, width: gameWidth * 0.75, height: vh * 0.15 },
-							leaderboard: { left: gameWidth * 0.75, top: vh * 0.05, width: gameWidth * 0.25, height: vh * 0.8 },
-							gamearea: { left: 0, top: vh * 0.2, width: gameWidth * 0.75, height: vh * 0.6 },
-							footer: { left: 0, top: vh * 0.8, width: gameWidth * 0.75, height: vh * 0.2 }
+							header: { left: 0, top: vh * 0.05, width: gameWidth * 0.75, height: 0 },
+							leaderboard: { left: gameWidth * 0.75, top: vh * 0.05, width: gameWidth * 0.25, height: vh * 0.95 },
+							gamearea: { left: 0, top: vh * 0.05, width: gameWidth * 0.75, height: vh * 0.95 },
+							footer: { left: 0, top: vh * 1.0, width: gameWidth * 0.75, height: 0 }
 						};
 						break;
 						
@@ -1367,6 +1367,15 @@ const buttonTemplate = `
 				applyStyle(leaderboard, config.leaderboard);
 				applyStyle(gamearea, config.gamearea);
 				applyStyle(footer, config.footer);
+
+				// Hide header and footer in landscape modes
+				const isWideLayout = layout === 'ultrawide' || layout === 'landscape';
+				if (header) {
+					header.style.display = isWideLayout ? 'none' : 'block';
+				}
+				if (footer) {
+					footer.style.display = isWideLayout ? 'none' : 'block';
+				}
 
 				// Full screen elements
 				if (fill) {
